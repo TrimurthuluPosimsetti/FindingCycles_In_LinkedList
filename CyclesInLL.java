@@ -63,18 +63,68 @@ public class CyclesInLL {
      * }
      *
      */
+    //This function checks wheather LinkedList has cycles or not
     static boolean hasCycle(SinglyLinkedListNode head) {
         SinglyLinkedListNode temp=new SinglyLinkedListNode(-1);
-        temp=head;
+        temp=head;//temporary variable to store head node
         int c=0;
-        while(temp.next!=null){
-            temp=temp.next;
+        while(temp.next!=null){ //iterating upto last node
+            temp=temp.next;     //increment temp node to next node
             c=c+1;
-            if(c>1000){
-                return true;
+            if(c>1000){         //here LinkedList length is 1000 so we check upto 1000 nodes
+                return true;    //if LinkedList has cycles the true
             }
         }
-        return false;
+        return false;          //if LinkedList dont have cycles then false
     }
 
     private static final Scanner scanner = new Scanner(System.in);
+    
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int tests = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        for (int testsItr = 0; testsItr < tests; testsItr++) {
+            int index = scanner.nextInt();
+            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+            SinglyLinkedList llist = new SinglyLinkedList();
+
+            int llistCount = scanner.nextInt();
+            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+            for (int i = 0; i < llistCount; i++) {
+                int llistItem = scanner.nextInt();
+                scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+                llist.insertNode(llistItem);
+            }
+          
+          	SinglyLinkedListNode extra = new SinglyLinkedListNode(-1);
+            SinglyLinkedListNode temp = llist.head;
+
+            for (int i = 0; i < llistCount; i++) {
+                if (i == index) {
+                    extra = temp;
+                }
+
+                if (i != llistCount-1) {
+                    temp = temp.next;
+                }
+            }
+      
+      		temp.next = extra;
+
+            boolean result = hasCycle(llist.head);
+
+            bufferedWriter.write(String.valueOf(result ? 1 : 0));
+            bufferedWriter.newLine();
+        }
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
