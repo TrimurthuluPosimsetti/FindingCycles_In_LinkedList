@@ -65,21 +65,21 @@ public class CyclesInLL {
      */
     //This function checks wheather LinkedList has cycles or not
     static boolean hasCycle(SinglyLinkedListNode head) {
-        SinglyLinkedListNode temp=new SinglyLinkedListNode(-1);
-        temp=head;//temporary variable to store head node
-        int c=0;
-        while(temp.next!=null){ //iterating upto last node
-            temp=temp.next;     //increment temp node to next node
-            c=c+1;
-            if(c>1000){         //here LinkedList length is 1000 so we check upto 1000 nodes
-                return true;    //if LinkedList has cycles the true
+        SinglyLinkedListNode temp = new SinglyLinkedListNode(-1);
+        temp = head; //temporary variable to store head node
+        int c = 0;
+        while (temp.next != null) { //iterating upto last node
+            temp = temp.next; //increment temp node to next node
+            c = c + 1;
+            if (c > 1000) { //here LinkedList length is 1000 so we check upto 1000 nodes
+                return true; //if LinkedList has cycles the true
             }
         }
-        return false;          //if LinkedList dont have cycles then false
+        return false; //if LinkedList dont have cycles then false
     }
 
     private static final Scanner scanner = new Scanner(System.in);
-    
+
     public static void main(String[] args) throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
@@ -101,8 +101,8 @@ public class CyclesInLL {
 
                 llist.insertNode(llistItem);
             }
-          
-          	SinglyLinkedListNode extra = new SinglyLinkedListNode(-1);
+
+            SinglyLinkedListNode extra = new SinglyLinkedListNode(-1);
             SinglyLinkedListNode temp = llist.head;
 
             for (int i = 0; i < llistCount; i++) {
@@ -110,12 +110,12 @@ public class CyclesInLL {
                     extra = temp;
                 }
 
-                if (i != llistCount-1) {
+                if (i != llistCount - 1) {
                     temp = temp.next;
                 }
             }
-      
-      		temp.next = extra;
+
+            temp.next = extra;
 
             boolean result = hasCycle(llist.head);
 
